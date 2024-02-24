@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gtodolist/common/config/global_config.dart';
 import 'package:gtodolist/common/routes/app_pages.dart';
-import 'package:sp_util/sp_util.dart';
 
 Future<void> main() async {
   await GlobalConfig.init();

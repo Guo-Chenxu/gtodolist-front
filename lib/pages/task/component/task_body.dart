@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gtodolist/common/models/task_model.dart';
+import 'package:gtodolist/common/routes/app_pages.dart';
 import 'package:gtodolist/pages/task/component/task_dialog.dart';
 import 'package:gtodolist/pages/task/task_controller.dart';
 
@@ -26,7 +27,6 @@ class TaskBody extends GetView<TaskController> {
             ),
             const SizedBox(width: 20),
             Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 TextButton(
                   style: ButtonStyle(
@@ -82,33 +82,54 @@ class TaskBody extends GetView<TaskController> {
             return Column(
               children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     ElevatedButton(
-                      onPressed: () => {
-                        Get.snackbar(
-                            '别按啦, 再按待办也不会减少哒', '目前一共有 ${_.tasks.length} 条待办任务')
-                      },
+                      onPressed: () => Get.offAllNamed(AppRoutes.home),
                       style: ElevatedButton.styleFrom(
                         backgroundColor:
-                            const Color.fromARGB(255, 110, 180, 236),
+                            const Color.fromARGB(255, 242, 180, 94),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(25),
                         ),
                       ),
-                      child: Text(
-                        '目前一共有 ${_.tasks.length} 条待办任务',
-                        style: const TextStyle(color: Colors.white),
+                      child: const Text(
+                        '返回主页',
+                        style: TextStyle(color: Colors.white),
                       ),
                     ),
-                    const SizedBox(width: 20),
-                    ElevatedButton(
-                      onPressed: () => _taskDialog.showCreateDialog(context),
-                      child: const Text("新增任务"),
-                    ),
-                    const SizedBox(width: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () => {
+                            Get.snackbar('别按啦, 再按待办也不会减少哒',
+                                '目前一共有 ${_.tasks.length} 条待办任务')
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                                const Color.fromARGB(255, 110, 180, 236),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(25),
+                            ),
+                          ),
+                          child: Text(
+                            '目前一共有 ${_.tasks.length} 条待办任务',
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                        ),
+                        const SizedBox(width: 20),
+                        ElevatedButton(
+                          onPressed: () =>
+                              _taskDialog.showCreateDialog(context),
+                          child: const Text("新增任务"),
+                        ),
+                        const SizedBox(width: 10),
+                      ],
+                    )
                   ],
                 ),
+                const Divider(),
                 Expanded(
                   child: ListView.builder(
                     itemCount: _.tasks.length,
