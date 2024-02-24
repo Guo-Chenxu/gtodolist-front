@@ -34,7 +34,7 @@ class AppPages {
       page: () => const TaskListView(),
       binding: TaskBinding(),
       middlewares: [
-        RouteAuthMiddleware(),
+        RouteAuthMiddleware(priority: 0),
       ],
     )
   ];
